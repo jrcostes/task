@@ -13,8 +13,10 @@
     </div>
 
     @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
+        <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show">
+            <div class="alert alert-success alert block">
+                <p>{{ $message }}</p>
+            </div>
         </div>
     @endif
 
@@ -40,7 +42,7 @@
                     @csrf
                     @method('DELETE')
 
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('{{ __('Are you sure you want to delete?') }}')">Delete</button>
                 </form>
             </td>
         </tr>
