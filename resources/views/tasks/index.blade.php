@@ -13,9 +13,11 @@
     </div>
 
     @if ($message = Session::get('success'))
-        <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show">
-            <div class="alert alert-success alert block">
-                <p>{{ $message }}</p>
+        <div>
+            <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show">
+                <div class="alert alert-success alert block">
+                    <p>{{ $message }}</p>
+                </div>
             </div>
         </div>
     @endif
@@ -49,6 +51,13 @@
         @endforeach
     </table>
 
-    {!! $tasks->links() !!}
+    {{-- <div id="app">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <task-table></task-table>
+            </div>
+        </div>
+    </div>
+    <script src="{{ mix('/js/app.js') }}"></script> --}}
 
 @endsection
