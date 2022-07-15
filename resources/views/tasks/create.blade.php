@@ -1,50 +1,61 @@
-@extends('tasks.layout')
+@extends('layouts.app', ['activePage' => 'tasks', 'titlePage' => __('create')])
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Add New Task</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('tasks.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <form method="post" action="{{ route('tasks.store') }}" autocomplete="off" class="form-horizontal">
+            @csrf
 
-@if ($errors->any())
-    <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show">
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-@endif
-
-<form action="{{ route('tasks.store') }}" method="POST">
-    @csrf
-
-     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Task Name:</strong>
-                <input type="text" name="task" class="form-control" placeholder="Task Name">
+            <div class="card ">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">{{ __('Create Task') }}</h4>
+                <p class="card-category">{{ __('Task details') }}</p>
+              </div>
+              <div class="card-body ">
+                @if (session('status'))
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                        </button>
+                        <span>{{ session('status') }}</span>
+                      </div>
+                    </div>
+                  </div>
+                @endif
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Task') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('task') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('task') ? ' is-invalid' : '' }}" name="task" id="input-task" type="text" placeholder="{{ __('Task') }}" value="{{ old('task') }}" required="true" aria-required="true"/>
+                      @if ($errors->has('task'))
+                        <span id="task-error" class="error text-danger" for="input-task">{{ $errors->first('task') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Description') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" id="input-description" type="text" placeholder="{{ __('Description') }}" value="{{ old('description') }}" required />
+                      @if ($errors->has('Description'))
+                        <span id="description-error" class="error text-danger" for="input-description">{{ $errors->first('description') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ml-auto mr-auto">
+                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+              </div>
             </div>
+          </form>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Description:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="Description"></textarea>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+      </div>
     </div>
-
-</form>
+  </div>
 @endsection
