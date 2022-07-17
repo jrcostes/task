@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Events\FormSubmitted;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -43,7 +43,8 @@ class TaskController extends Controller
             'description' => 'required',
         ]);
 
-        Task::create($request->all());
+        $task = Task::create($request->all());
+        event(new FormSubmitted($task));
 
         return redirect()->route('tasks.index')
                         ->with('success','Task created successfully.');

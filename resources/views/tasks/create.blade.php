@@ -14,7 +14,7 @@
                 <p class="card-category">{{ __('Task details') }}</p>
               </div>
               <div class="card-body ">
-                @if (session('status'))
+                @if(session('status'))
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="alert alert-success">

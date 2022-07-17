@@ -10,12 +10,26 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Events\FormSubmitted;
 Route::resource('tasks','TaskController');
 
 Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+
+Route::get('/counter', function () {
+    return view('counter');
+});
+
+Route::get('/sender', function () {
+    return view('sender');
+});
+
+// Route::post('/sender', function () {
+//     $text = request()->text;
+//     event(new FormSubmitted($text));
+// });
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 

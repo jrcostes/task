@@ -19,7 +19,7 @@
             @if ($message = Session::get('success'))
                 <div class="row">
                     <div class="col-sm-12">
-                        <div x-data="{show: true}" x-init="setTimeout(() => show = false, 5000)" x-show="show">
+                        <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show">
                             <div class="alert alert-success alert block">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <i class="material-icons">close</i>
@@ -36,7 +36,7 @@
                   <th>ID</th>
                   <th>Task Name</th>
                   <th>Description</th>
-                  <th>Date created</th>
+                  <th>Actions</th>
                 </thead>
                 <tbody>
                     @foreach ($tasks as $task)

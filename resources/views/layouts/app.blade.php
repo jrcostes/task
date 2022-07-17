@@ -27,7 +27,7 @@
         @guest()
             @include('layouts.page_templates.guest')
         @endguest
-        
+
         <div class="fixed-plugin">
           <div class="dropdown show-dropdown">
             <a href="#" data-toggle="dropdown">
@@ -141,5 +141,22 @@
         <script src="{{ asset('material') }}/demo/demo.js"></script>
         <script src="{{ asset('material') }}/js/settings.js"></script>
         @stack('js')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
+        <script src="https://js.pusher.com/7.1/pusher.min.js"></script>
+            <script>
+
+                // Enable pusher logging - don't include this in production
+                Pusher.logToConsole = true;
+
+                var pusher = new Pusher('389d2b46012722b27d89', {
+                cluster: 'ap4'
+                });
+
+                var channel = pusher.subscribe('my-channel');
+                channel.bind('my-event', function(data) {
+                $task
+                });
+            </script>
     </body>
 </html>
