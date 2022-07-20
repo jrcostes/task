@@ -56,6 +56,7 @@
                     @endforeach
                 </tbody>
               </table>
+              {{ $tasks->onEachSide(1)->links() }}
             </div>
           </div>
         </div>
